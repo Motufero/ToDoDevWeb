@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="style.css">
+<script src="../scripts/scripts.js"></script>
+
+<div class="grid-container">
+    <div class="item1">
+        <h1>My To-do List</h1>
+    </div>
+    <div class="item2">
+        <div id="menubar">
+            <ul id="menulist">
+                <button class="button"onclick="addTask()"> Adicionar </button>
+                <p id="demo"></p>
+                <li class="menuitem" onclick="">
+                Tarefa 1 </li>
+                <li class="menuitem" onclick="">
+                Tarefa 2 </li>
+                <li class="menuitem" onclick="">
+                Tarefa 3 </li>
+            </ul>
+        </div>
+    </div>
+    <div class="item3" id = "gridMain"> <!--Item 3 é o Main (centro da tela)-->
+        <form action="" method="post" role="form">
+    
+
+            <div class="form-group">
+                <label for="">Nome da Tarefa</label>
+                <input type="text" class="form-control" name="name" placeholder="Digite o nome da tarefa" id = "nomeTask">
+            </div>
+        
+        
+            <div class="form-group">
+                <label for="">Assunto Geral</label>
+                <input type="text" class="form-control" name="subject" placeholder="Digite o tema da tarefa">
+            </div>
+        
+        
+            <div class="form-group">
+                <label for="" style="top: 10px;">Descrição</label> <!--COMO AUMENTAR O TOP?-->
+                <textarea name="message" id="" class="form-control"></textarea>
+            </div>
+        
+        
+            <button type="submit" class="button">Submit</button>
+        </form>
+
+    </div>  
+    <div class="item4">Right</div>
+    <div class="item5">
+        <div id = "footer">
+            espaço adicional para funcionalidades futuras.
+        </div>
+    </div>
+  </div>
+
+
+
+
