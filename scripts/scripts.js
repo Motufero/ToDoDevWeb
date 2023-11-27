@@ -37,5 +37,16 @@ function editNewTask(){
     chdLabelGeneric.innerHTML = `<label for="">Assunto Geral</label>
     <input type="text" class="form-control" name="subject" placeholder="Digite o tema da tarefa">`;
 
-    e.append(chdForm, chdLabelName, chdLabelGeneric);
+    let chdLabelDescription = document.createElement('label');
+    chdLabelDescription.className = "form-group";
+    chdLabelDescription.innerHTML = `<label for="" style="top: 10px;">Descrição</label>
+    <textarea name="message" id="" class="form-control"></textarea>`;
+
+    let chdButton = document.createElement('button');
+    chdButton.className = "button";
+    chdButton.innerHTML = `<button type="submit" class="button">Submit</button>`;
+
+    e.append(chdForm, chdLabelName, chdLabelGeneric, chdLabelDescription, chdButton);
+
+    nFooter.append(chdButton);
 }
