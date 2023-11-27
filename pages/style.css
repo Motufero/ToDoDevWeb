@@ -73,6 +73,11 @@
   margin: 0px;
 }
 
+#taskInfo {
+  line-height: 20px;
+  margin-left: 5px;
+}
+
 #footer {
   border: 1px solid #d4d4d4;
   text-align: center;
