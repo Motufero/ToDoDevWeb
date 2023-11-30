@@ -14,7 +14,7 @@ function addTask(){
         todoList.appendChild(newTask);
     }
     else{
-        document.getElementById("demo").innerHTML = "Insira um nome!";
+        alert('Insira as informações da tarefa!');
     }
 }
 
@@ -44,9 +44,9 @@ function editNewTask(){
 
     let chdButton = document.createElement('button');
     chdButton.className = "button";
-    chdButton.innerHTML = `<button type="submit" class="button">Submit</button>`;
+    chdButton.innerHTML = `<button type="submit" class="button"
+    onclick="addTask()">Submit</button>`;
 
     e.append(chdForm, chdLabelName, chdLabelGeneric, chdLabelDescription, chdButton);
 
-    nFooter.append(chdButton);
 }
