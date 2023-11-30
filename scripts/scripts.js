@@ -18,11 +18,12 @@ function addTask(){
     }
 }
 
-function editNewTask(){
-    var e = document.getElementById('taskInfo');
-    while (e.firstChild) {
-        e.removeChild(e.firstChild);
-    }
+function editNewTask(){   
+    deactivateMain();
+    deactivateFooter();
+
+    var mainForm = document.getElementById('taskInfo');
+
     let chdForm = document.createElement('form');
     chdForm.method = "post";
     chdForm.role = "form";
@@ -47,6 +48,20 @@ function editNewTask(){
     chdButton.innerHTML = `<button type="submit" class="button"
     onclick="addTask()">Submit</button>`;
 
-    e.append(chdForm, chdLabelName, chdLabelGeneric, chdLabelDescription, chdButton);
+    mainForm.append(chdForm, chdLabelName, chdLabelGeneric, chdLabelDescription, chdButton);
 
+}
+
+function deactivateMain(){
+    var main = document.getElementById('taskInfo');
+    while (main.firstChild) {
+        main.removeChild(main.firstChild);
+    }
+}
+
+function deactivateFooter(){
+    var ftr = document.getElementById('footer');
+    while (ftr.firstChild) {
+        ftr.removeChild(ftr.firstChild);
+    }
 }
