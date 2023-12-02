@@ -2,6 +2,15 @@ function myFunction() {
     document.getElementById("demo").innerHTML = "Paragraph added.";
   }
 
+  function styleMenuItem(newItem) {
+    let oldItem = document.getElementById('activeItem');
+    oldItem.classList.remove("selectedItem");
+    oldItem.classList.add("menuitem");
+    oldItem.id = "";
+    newItem.classList.remove("menuitem");
+    newItem.classList.add("selectedItem");
+    newItem.id = "activeItem";
+}
 
 
 function addTask(){
@@ -10,7 +19,10 @@ function addTask(){
         var newTask = document.createElement('li');
         newTask.className = "menuitem";
         newTask.innerHTML = textvalue;
-        let todoList = document.getElementById('menubar');
+        newTask.id = "";
+        newTask.setAttribute("onClick", "styleMenuItem(this)");
+        
+        let todoList = document.getElementById('menulist');
         todoList.appendChild(newTask);
         deactivateMain();
         constructMainInfo();
@@ -20,6 +32,8 @@ function addTask(){
         alert('Insira as informações da tarefa!');
     }
 }
+
+
 
 function editNewTask(){   
     deactivateMain();

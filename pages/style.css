@@ -122,12 +122,6 @@ ul{
   padding-inline-start: 40px;
 }
 
-.menuitem:first-child{
-  background-color: mediumseagreen;
-  color: white;
-  font-weight: bold;
-}
-
 .menuitem {
   background-color: #f1f1f1;
   border: 1px solid #49e68a;
@@ -136,7 +130,19 @@ ul{
   cursor: pointer;
 }
 
-.menuitem, .button{
+.menuitem:hover {
+  background-color: #ffffff;
+}
+
+.selectedItem{
+  background-color: mediumseagreen;
+  color: white;
+  font-weight: bold;
+  padding: 2px;
+  list-style-type: none;
+}
+
+.menuitem, .selectedItem,.button{
   border-radius: 4px;
   margin: 4px;
 }

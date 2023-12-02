@@ -7,14 +7,14 @@
     </div>
     <div class="item2">
         <div id="menubar">
+            <button class="mainButton"onclick="editNewTask()"> Adicionar </button>
             <ul id="menulist">
-                <button class="mainButton"onclick="editNewTask()"> Adicionar </button>
-                <p id="demo"></p>
-                <li class="menuitem" onclick="">
+                
+                <li class="selectedItem", id = "activeItem" onclick="styleMenuItem(this)">
                 Tarefa 1 </li>
-                <li class="menuitem" onclick="">
+                <li class="menuitem", id = "" onclick="styleMenuItem(this)">
                 Tarefa 2 </li>
-                <li class="menuitem" onclick="">
+                <li class="menuitem", id = "" onclick="styleMenuItem(this)">
                 Tarefa 3 </li>
             </ul>
         </div>
