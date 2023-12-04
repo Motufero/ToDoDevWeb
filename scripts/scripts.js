@@ -2,7 +2,7 @@ function myFunction() {
     document.getElementById("demo").innerHTML = "Paragraph added.";
   }
 
-  function styleMenuItem(newItem) {
+function styleMenuItem(newItem) {
     let oldItem = document.getElementById('activeItem');
     oldItem.classList.remove("selectedItem");
     oldItem.classList.add("menuitem");
@@ -12,6 +12,17 @@ function myFunction() {
     newItem.id = "activeItem";
 }
 
+function putTaskDTB(newDbTaskask){
+    fetch('/tasks', {
+        method: 'POST' ,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ task: newDbTaskask}), 
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Erro no Script: ', error));
+}
 
 function addTask(){
     let textvalue = document.getElementById('nomeTask').value;
@@ -27,6 +38,7 @@ function addTask(){
         deactivateMain();
         constructMainInfo();
         constructFooter();
+        putTaskDTB(textvalue);
     }
     else{
         alert('Insira as informações da tarefa!');
