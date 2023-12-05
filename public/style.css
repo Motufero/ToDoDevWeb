@@ -1,0 +1,220 @@
+.init-content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  background-color: #d9e2ec 45%;
+  flex-direction: column;
+}
+
+.login{
+  margin-top: 3rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.alink{
+  color: mediumseagreen;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.log-button {
+  background: mediumseagreen;
+  border-radius: 2rem;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  justify-content: space-around;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 244px;
+  
+}
+
+/*-----------para a task---------------*/
+
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main main right'
+    'menu footer footer footer footer right';
+  gap: 0px;
+  column-gap: 5px;
+  background-color: #cdeedc;  /* elemento que exibe as "linhas" do grid */
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.911);
+  text-align: left;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.item3 {
+  padding: 10px;  
+  /*width: 1200px; */ 
+}
+
+.item2 {
+  margin: 0px;
+}
+
+#taskInfo {
+  line-height: 20px;
+  margin-left: 5px;
+}
+
+#footer {
+  border: 1px solid #d4d4d4;
+  text-align: center;
+  padding: 20px;
+  font-size: 70%;
+  line-height: 14px;
+  margin-top: -20px;
+  margin-bottom: 0px;
+}
+
+h1{
+    background-color: mediumseagreen;
+    color: aliceblue;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+
+    
+}
+#menubar{
+  width: 200px;
+  float: left;
+  margin-left: 10px;    
+}
+
+#menulist{
+  margin: 0;
+  padding: 0;
+}
+
+ul{
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 40px;
+}
+
+.menuitem {
+  background-color: #f1f1f1;
+  border: 1px solid #49e68a;
+  padding: 2px;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.menuitem:hover {
+  background-color: #ffffff;
+}
+
+.selectedItem{
+  background-color: mediumseagreen;
+  color: white;
+  font-weight: bold;
+  padding: 2px;
+  list-style-type: none;
+}
+
+.menuitem, .selectedItem,.button{
+  border-radius: 4px;
+  margin: 4px;
+}
+
+.mainButton{
+  background-color: #4caf50;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.ftrButton{
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 4px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+li {
+  display: list-item;
+  text-align: left;
+}
+
+/*--------Para o Formulário----------*/
+
+label {
+  padding-left: 10px;
+}
+
+.form-group{
+  padding-left: 5px;
+  padding-right: 10px;
+  input[type=text], select{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type=password], select{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type=email], select{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #ffffff;
+  resize: none;
+}
+
+.textbox{
+  background-color: #ffffff;
+}
