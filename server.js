@@ -5,11 +5,11 @@ const fs = require('fs');
 const app = express();
 const port = 5000;
 
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-const scriptFilePath = path.join(__dirname, 'scripts/scripts.js');
-const usersFilePath = path.join(__dirname, 'backEnd/users.json');
-const tasksFilePath = path.join(__dirname, 'backEnd/tasks.json');
+const scriptFilePath = path.join(__dirname, '/scripts/scripts.js');
+const usersFilePath = path.join(__dirname, '/backEnd/users.json');
+const tasksFilePath = path.join(__dirname, '/backEnd/tasks.json');
 
 
 app.get('/tasks', (req, res) => {
