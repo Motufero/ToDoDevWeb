@@ -2,6 +2,15 @@ function myFunction() {
     document.getElementById("demo").innerHTML = "Paragraph added.";
   }
 
+window.onload = function() {
+    fetch('/tasks')
+        .then(response => response.json())
+        .then(tasks => {
+            loadTasks(tasks);
+        })
+        .catch(error => console.error('Erro:', error));
+};
+
 function styleMenuItem(newItem) {
     let oldItem = document.getElementById('activeItem');
     oldItem.classList.remove("selectedItem");
@@ -45,7 +54,18 @@ function addTask(){
     }
 }
 
-
+function loadTasks(tasks){
+    var loadTodoList = document.getElementById('menulist');
+    loadTodoList.innerHTML = '';
+    tasks.forEach(task => {
+        var newTask = document.createElement('li');
+        newTask.className = "menuitem";
+        newTask.innerHTML = task["Nome"];
+        newTask.id = "";
+        loadTodoList.appendChild(newTask);
+        newTask.setAttribute("onClick", "styleMenuItem(this)");
+    });
+}
 
 function editNewTask(){   
     deactivateMain();
