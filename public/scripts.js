@@ -2,6 +2,7 @@ function myFunction() {
     document.getElementById("demo").innerHTML = "Paragraph added.";
   }
 
+//Quando carrega a página, já pega as tarefas 
 window.onload = function() {
     fetch('/tasks')
         .then(response => response.json())
@@ -11,11 +12,14 @@ window.onload = function() {
         .catch(error => console.error('Erro:', error));
 };
 
+
 function styleMenuItem(newItem) {
-    let oldItem = document.getElementById('activeItem');
-    oldItem.classList.remove("selectedItem");
-    oldItem.classList.add("menuitem");
-    oldItem.id = "";
+    if (document.getElementById('activeItem')){
+        let oldItem = document.getElementById('activeItem');
+        oldItem.classList.remove("selectedItem");
+        oldItem.classList.add("menuitem");
+        oldItem.id = "";
+    }
     newItem.classList.remove("menuitem");
     newItem.classList.add("selectedItem");
     newItem.id = "activeItem";
