@@ -2,16 +2,40 @@ function myFunction() {
     document.getElementById("demo").innerHTML = "Paragraph added.";
   }
 
-  function styleMenuItem(newItem) {
-    let oldItem = document.getElementById('activeItem');
-    oldItem.classList.remove("selectedItem");
-    oldItem.classList.add("menuitem");
-    oldItem.id = "";
+//Quando carrega a página, já pega as tarefas 
+window.onload = function() {
+    fetch('/tasks')
+        .then(response => response.json())
+        .then(tasks => {
+            loadTasks(tasks);
+        })
+        .catch(error => console.error('Erro:', error));
+};
+
+
+function styleMenuItem(newItem) {
+    if (document.getElementById('activeItem')){
+        let oldItem = document.getElementById('activeItem');
+        oldItem.classList.remove("selectedItem");
+        oldItem.classList.add("menuitem");
+        oldItem.id = "";
+    }
     newItem.classList.remove("menuitem");
     newItem.classList.add("selectedItem");
     newItem.id = "activeItem";
 }
 
+function putTaskDTB(newDbTaskask){
+    fetch('/tasks', {
+        method: 'POST' ,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ task: newDbTaskask}), 
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Erro no Script: ', error));
+}
 
 function addTask(){
     let textvalue = document.getElementById('nomeTask').value;
@@ -27,13 +51,25 @@ function addTask(){
         deactivateMain();
         constructMainInfo();
         constructFooter();
+        putTaskDTB(textvalue);
     }
     else{
         alert('Insira as informações da tarefa!');
     }
 }
 
-
+function loadTasks(tasks){
+    var loadTodoList = document.getElementById('menulist');
+    loadTodoList.innerHTML = '';
+    tasks.forEach(task => {
+        var newTask = document.createElement('li');
+        newTask.className = "menuitem";
+        newTask.innerHTML = task["Nome"];
+        newTask.id = "";
+        loadTodoList.appendChild(newTask);
+        newTask.setAttribute("onClick", "styleMenuItem(this)");
+    });
+}
 
 function editNewTask(){   
     deactivateMain();
