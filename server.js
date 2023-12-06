@@ -24,7 +24,8 @@ app.get('/tasks', (req, res) => {
 });
 
 app.post('/tasks', express.json(), (req, res) => {
-    const newTask = req.body.task;
+    //const newTask = req.body.task;
+    const newTask = req.body;
 
     fs.readFile(tasksFilePath, 'utf8', (err, data) => {
         if (err) {

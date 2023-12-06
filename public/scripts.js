@@ -29,21 +29,46 @@ function loadTasks(tasks){
 
 //Funções para adicionar task ao servidor--------------------------------------
 //adicopna ao 'Database'
-function putTaskDTB(newDbTaskask){
+function putTaskDTB(newDbTaskName, newDbTaskTopic, newDbTaskDesc){
     fetch('/tasks', {
         method: 'POST' ,
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ task: newDbTaskask}), 
+        body: JSON.stringify({ Nome: newDbTaskName, Tema: newDbTaskTopic, Descricao: newDbTaskDesc}), 
     })
     .then(response => response.json())
     .catch(error => console.error('Erro no Script: ', error));
 }
 
+
+/*function putTaskDTB(newDbTaskName, newDbTaskTopic, newDbTaskDesc){
+    var payload = {
+        Nome: newDbTaskName,
+        Tema: newDbTaskTopic,
+        Descricao: newDbTaskDesc
+    };
+    
+    var data = new FormData();
+    data.append( "json", JSON.stringify( payload ) );
+    
+    fetch('/tasks',
+    {
+        method: "POST",
+        body: data
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(data){ alert( JSON.stringify( data ) ) })
+}
+*/
+
+
 //Reorganiza a página, e chama a função de inserir no database
 function addTask(){
     let textvalue = document.getElementById('nomeTask').value;
+    let topicvalue = document.getElementById('topicTask').value;
+    let descriptionvalue = document.getElementById('descriptionTask').value;
+
     if(textvalue){
         var newTask = document.createElement('li');
         newTask.className = "menuitem";
@@ -56,7 +81,7 @@ function addTask(){
         deactivateMain();
         constructMainInfo();
         constructFooter();
-        putTaskDTB(textvalue);
+        putTaskDTB(textvalue, topicvalue, descriptionvalue);
     }
     else{
         alert('Insira as informações da tarefa!');
@@ -121,12 +146,12 @@ function editNewTask(){
     let chdLabelGeneric = document.createElement('label');
     chdLabelGeneric.className = "form-group";
     chdLabelGeneric.innerHTML = `<label for="">Assunto Geral</label>
-    <input type="text" class="form-control" name="subject" placeholder="Digite o tema da tarefa">`;
+    <input type="text" class="form-control" name="subject" placeholder="Digite o tema da tarefa" id = "topicTask">`;
 
     let chdLabelDescription = document.createElement('label');
     chdLabelDescription.className = "form-group";
     chdLabelDescription.innerHTML = `<label for="" style="top: 10px;">Descrição</label>
-    <textarea name="message" id="" class="form-control"></textarea>`;
+    <textarea name="message" id = "descriptionTask" class="form-control"></textarea>`;
 
     let chdButton = document.createElement('button');
     chdButton.className = "button";
