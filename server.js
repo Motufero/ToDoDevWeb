@@ -23,6 +23,29 @@ app.get('/tasks', (req, res) => {
     });
 });
 
+app.delete('/tasks', express.json(), (req, res) => {
+    const selectedTask = req.body;
+    fs.readFile(tasksFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Erro ao ler as tarefas.' });
+        }
+
+        const tasks = JSON.parse(data);
+        tasks.delete(selectedTask); //da erro
+
+        fs.writeFile(tasksFilePath, JSON.stringify(tasks), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Erro ao escrever as tarefas.' });
+            } 
+            res.json(tasks);
+        });
+    });
+});
+
+
+
 app.post('/tasks', express.json(), (req, res) => {
     //const newTask = req.body.task;
     const newTask = req.body;

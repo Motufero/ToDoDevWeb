@@ -42,27 +42,6 @@ function putTaskDTB(newDbTaskName, newDbTaskTopic, newDbTaskDesc){
 }
 
 
-/*function putTaskDTB(newDbTaskName, newDbTaskTopic, newDbTaskDesc){
-    var payload = {
-        Nome: newDbTaskName,
-        Tema: newDbTaskTopic,
-        Descricao: newDbTaskDesc
-    };
-    
-    var data = new FormData();
-    data.append( "json", JSON.stringify( payload ) );
-    
-    fetch('/tasks',
-    {
-        method: "POST",
-        body: data
-    })
-    .then(function(res){ return res.json(); })
-    .then(function(data){ alert( JSON.stringify( data ) ) })
-}
-*/
-
-
 //Reorganiza a página, e chama a função de inserir no database
 function addTask(){
     let textvalue = document.getElementById('nomeTask').value;
@@ -88,6 +67,44 @@ function addTask(){
     }
 }
 //------------------------------------------------------------------------
+
+function removeTask(){
+    var taskName = document.getElementById('activeItem').innerHTML;
+
+    fetch('/tasks')
+    .then(response => response.json())
+    .then(tasks => {
+        tasks.forEach(task => {
+            if(task["Nome"] == taskName){
+                fetch('/tasks', {
+                    method: 'DELETE',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(task)
+                })
+                .then(response => {
+                    return response.json( )
+                })
+            //loadTasks();          
+            }
+        });
+    })
+}
+
+/*
+function removeTask(){
+    var taskName = document.getElementById('activeItem').innerHTML;
+    fetch('tasks', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: null
+    })    
+}
+*/
+
 
 function styleMenuItem(newItem) {
     if (document.getElementById('activeItem')){
@@ -200,7 +217,7 @@ function constructFooter(){
     chdButtonDeletar.style="background-color:rgb(211, 73, 73)";
     chdButtonDeletar.textContent = "Deletar";
     chdButtonDeletar.addEventListener('click', () => {
-        alert('deletar!');
+        removeTask();
     });
 
     /*let chdButtonDeletar = document.createElement('button');
