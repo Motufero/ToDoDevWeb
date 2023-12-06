@@ -12,19 +12,23 @@ window.onload = function() {
         .catch(error => console.error('Erro:', error));
 };
 
-
-function styleMenuItem(newItem) {
-    if (document.getElementById('activeItem')){
-        let oldItem = document.getElementById('activeItem');
-        oldItem.classList.remove("selectedItem");
-        oldItem.classList.add("menuitem");
-        oldItem.id = "";
-    }
-    newItem.classList.remove("menuitem");
-    newItem.classList.add("selectedItem");
-    newItem.id = "activeItem";
+function loadTasks(tasks){
+    var loadTodoList = document.getElementById('menulist');
+    loadTodoList.innerHTML = '';
+    tasks.forEach(task => {
+        var newTask = document.createElement('li');
+        newTask.className = "menuitem";
+        newTask.innerHTML = task["Nome"];
+        newTask.id = "";
+        loadTodoList.appendChild(newTask);
+        newTask.setAttribute("onClick", "styleMenuItem(this)");
+    });
 }
 
+
+
+//Funções para adicionar task ao servidor--------------------------------------
+//adicopna ao 'Database'
 function putTaskDTB(newDbTaskask){
     fetch('/tasks', {
         method: 'POST' ,
@@ -37,6 +41,7 @@ function putTaskDTB(newDbTaskask){
     .catch(error => console.error('Erro no Script: ', error));
 }
 
+//Reorganiza a página, e chama a função de inserir no database
 function addTask(){
     let textvalue = document.getElementById('nomeTask').value;
     if(textvalue){
@@ -57,20 +62,47 @@ function addTask(){
         alert('Insira as informações da tarefa!');
     }
 }
+//------------------------------------------------------------------------
 
-function loadTasks(tasks){
-    var loadTodoList = document.getElementById('menulist');
-    loadTodoList.innerHTML = '';
-    tasks.forEach(task => {
-        var newTask = document.createElement('li');
-        newTask.className = "menuitem";
-        newTask.innerHTML = task["Nome"];
-        newTask.id = "";
-        loadTodoList.appendChild(newTask);
-        newTask.setAttribute("onClick", "styleMenuItem(this)");
-    });
+function styleMenuItem(newItem) {
+    if (document.getElementById('activeItem')){
+        let oldItem = document.getElementById('activeItem');
+        oldItem.classList.remove("selectedItem");
+        oldItem.classList.add("menuitem");
+        oldItem.id = "";
+    }
+    newItem.classList.remove("menuitem");
+    newItem.classList.add("selectedItem");
+    newItem.id = "activeItem";
+    showTaskInfo();
+    
 }
 
+function showTaskInfo(){
+    var taskName = document.getElementById('activeItem').innerHTML;
+    console.log(taskName);
+    deactivateMain();
+    var mainInfo = document.getElementById('taskInfo');
+    fetch('/tasks')
+    .then(response => response.json())
+    .then(tasks => {
+        tasks.forEach(task => {
+            if(task["Nome"] == taskName){
+                let chdHeader = document.createElement('h2');
+                chdHeader.id = "headTask";
+                chdHeader.innerHTML = task["Nome"];
+                let chdTopic = document.createElement('p');
+                chdTopic.innerHTML = task["Tema"];
+                let chdDescription = document.createElement('p');
+                chdDescription.innerHTML = task["Descricao"];
+                mainInfo.append(chdHeader, chdTopic, chdDescription);
+            }
+        });
+    })
+    .catch(error => console.error('Erro:', error));
+}
+
+//Funções para reorganizar o grid-view
 function editNewTask(){   
     deactivateMain();
     deactivateFooter();
