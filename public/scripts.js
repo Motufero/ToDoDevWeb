@@ -106,6 +106,93 @@ function removeTask(){
 */
 
 
+function updateTaskDB(){
+
+    var ref = document.getElementById('activeItem').innerHTML;
+
+    let newDbTaskName = document.getElementById('nomeTask').value;
+    let newDbTaskTopic = document.getElementById('topicTask').value;
+    let newDbTaskDesc = document.getElementById('descriptionTask').value;
+
+    console.log(ref);
+    console.log(newDbTaskName);
+    console.log(newDbTaskTopic);
+    /*fetch('/tasks', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })*/
+    fetch('/tasks')
+    .then(response => response.json())
+    .then(tasks => {
+        tasks.forEach(task => {
+            if(task["Nome"] == ref){     
+                if(newDbTaskName =! ''){
+                    task["Nome"] = newDbTaskName;
+                }           
+                if(newDbTaskTopic =! ''){
+                    task["Tema"] = newDbTaskTopic;
+                }
+                if(newDbTaskDesc =! ''){
+                    task["Descricao"] = newDbTaskDesc;
+                }
+                //mainInfo.append(chdHeader, chdTopic, chdDescription);
+            }
+        });
+    })
+    .catch(error => console.error('Erro:', error));
+}
+
+function updateTask(){
+    deactivateMain();
+    deactivateFooter();
+
+    var taskName = document.getElementById('activeItem').innerHTML;
+    var mainInfo = document.getElementById('taskInfo');
+
+    let chdForm = document.createElement('form');
+    chdForm.method = "post";
+    chdForm.role = "form";
+
+    fetch('/tasks')
+    .then(response => response.json())
+    .then(tasks => {
+        tasks.forEach(task => {
+            if(task["Nome"] == taskName){
+                let chdHeader = task["Nome"];                
+                let chdTopic = task["Tema"];
+                let chdDescription = task["Descricao"];
+
+                let chdLabelName = document.createElement('label');
+                chdLabelName.className = "form-group";
+                chdLabelName.innerHTML = `<label for=''>Nome da Tarefa</label>
+                <input type="text" class="form-control" name="name" placeholder="${chdHeader}" id = "nomeTask">`;
+
+                let chdLabelGeneric = document.createElement('label');
+                chdLabelGeneric.className = "form-group";
+                chdLabelGeneric.innerHTML = `<label for="">Assunto Geral</label>
+                <input type="text" class="form-control" name="subject" placeholder="${chdTopic}" id = "topicTask">`;
+
+                let chdLabelDescription = document.createElement('label');
+                chdLabelDescription.className = "form-group";
+                chdLabelDescription.innerHTML = `<label for="" style="top: 10px;">Descrição</label>
+                <textarea name="message" id = "descriptionTask" class="form-control" placeholder="${chdDescription}"></textarea>`;
+
+                let chdButton = document.createElement('button');
+                chdButton.className = "button";
+                chdButton.innerHTML = `<button type="submit" class="mainButton"
+                onclick="updateTaskDB()">Submit</button>`;
+
+                mainInfo.append(chdForm, chdLabelName, chdLabelGeneric, chdLabelDescription, chdButton);
+
+            }
+        });
+    })
+    .catch(error => console.error('Erro:', error));
+
+}
+
 function styleMenuItem(newItem) {
     if (document.getElementById('activeItem')){
         let oldItem = document.getElementById('activeItem');
@@ -207,15 +294,15 @@ function constructFooter(){
     let chdButtonConcluir = document.createElement('button');
     chdButtonConcluir.className = "ftrButton";
     chdButtonConcluir.style="background-color: #4caf50";
-    chdButtonConcluir.textContent = "Concluir";
+    chdButtonConcluir.textContent = "Editar";
     chdButtonConcluir.addEventListener('click', () => {
-        alert('concluir!');
+        updateTask();
       });
     
     let chdButtonDeletar = document.createElement('button');
     chdButtonDeletar.className = "ftrButton";
     chdButtonDeletar.style="background-color:rgb(211, 73, 73)";
-    chdButtonDeletar.textContent = "Deletar";
+    chdButtonDeletar.textContent = "Finalizar";
     chdButtonDeletar.addEventListener('click', () => {
         removeTask();
     });
