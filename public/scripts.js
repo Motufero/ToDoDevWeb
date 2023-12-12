@@ -69,41 +69,30 @@ function addTask(){
 //------------------------------------------------------------------------
 
 function removeTask(){
-    var taskName = document.getElementById('activeItem').innerHTML;
+    /*var taskName = document.getElementById('activeItem').innerHTML;
+    fetch(`/task/${taskName}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json())   
+    */
+    
 
+    var taskName = document.getElementById('activeItem').innerHTML;
+    console.log(taskName);
+    //var mainInfo = document.getElementById('taskInfo');
     fetch('/tasks')
     .then(response => response.json())
     .then(tasks => {
         tasks.forEach(task => {
             if(task["Nome"] == taskName){
-                fetch('/tasks', {
-                    method: 'DELETE',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(task)
-                })
-                .then(response => {
-                    return response.json( )
-                })
-            //loadTasks();          
+                console.log(task["Descricao"]);          
             }
         });
     })
+    .catch(error => console.error('Erro:', error));
 }
-
-/*
-function removeTask(){
-    var taskName = document.getElementById('activeItem').innerHTML;
-    fetch('tasks', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: null
-    })    
-}
-*/
 
 
 function updateTaskDB(){
@@ -117,12 +106,9 @@ function updateTaskDB(){
     console.log(ref);
     console.log(newDbTaskName);
     console.log(newDbTaskTopic);
-    /*fetch('/tasks', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })*/
+    console.log(newDbTaskDesc);
+
+    /*
     fetch('/tasks')
     .then(response => response.json())
     .then(tasks => {
@@ -142,6 +128,7 @@ function updateTaskDB(){
         });
     })
     .catch(error => console.error('Erro:', error));
+    */
 }
 
 function updateTask(){
