@@ -71,15 +71,16 @@ function addTask(){
 function removeTask(){
     var taskName = document.getElementById('activeItem').innerHTML;
     console.log(taskName);
-    fetch(`/task`, {
-        method: 'PATCH',
+    fetch(`/tasks/${taskName}`, {
+        method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            //'Content' : JSON.stringify({Nome: taskName}),
         },
-        body: JSON.stringify({Nome: taskName}),
+        //body: JSON.stringify({Nome: taskName}),
     }).then(response => response.json())   
 }
-    
+
 
 function updateTaskDB(){
 
