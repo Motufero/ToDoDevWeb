@@ -69,31 +69,17 @@ function addTask(){
 //------------------------------------------------------------------------
 
 function removeTask(){
-    /*var taskName = document.getElementById('activeItem').innerHTML;
-    fetch(`/task/${taskName}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => response.json())   
-    */
-    
-
     var taskName = document.getElementById('activeItem').innerHTML;
     console.log(taskName);
-    //var mainInfo = document.getElementById('taskInfo');
-    fetch('/tasks')
-    .then(response => response.json())
-    .then(tasks => {
-        tasks.forEach(task => {
-            if(task["Nome"] == taskName){
-                console.log(task["Descricao"]);          
-            }
-        });
-    })
-    .catch(error => console.error('Erro:', error));
+    fetch(`/task`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({Nome: taskName}),
+    }).then(response => response.json())   
 }
-
+    
 
 function updateTaskDB(){
 

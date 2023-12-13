@@ -34,6 +34,10 @@ app.delete('/tasks', (req, res) => {
     //.catch(() => { res.status(404).send() })
     //res.json({ res: 'success' });
 
+    console.log('DELETAR');
+
+    /*
+
     const delTask = req.body;
     fs.readFile(tasksFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -51,9 +55,36 @@ app.delete('/tasks', (req, res) => {
             res.json(tasks);
         })
     });
+    */
 }); 
 
-app.patch('/task', (req, res) => {
+app.patch('/task', express.json(), (req, res) => {
+    
+    const patchTask = req.body;
+    //console.log(patchTask);
+
+    fs.readFile(tasksFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Erro ao ler as tarefas.' });
+        }
+
+        const tasks = JSON.parse(data);
+        var patchTasks = [];
+
+        tasks.forEach(task => {
+            if(task["Nome"] != patchTask["Nome"]) {
+                patchTasks.push(task);
+            }
+        })
+        fs.writeFile(tasksFilePath, JSON.stringify(patchTasks), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Erro ao escrever as tarefas.' });
+            }
+        });
+    }),
+
     res.json({ res: 'success' });
     
 });
