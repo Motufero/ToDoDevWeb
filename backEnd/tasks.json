@@ -1,5 +1,1 @@
-[
-    {"Nome":"Tarefa","Tema":"tarefa de web","Descricao":"Terminar o programa da Todo list"},
-    {"Nome":"APOO","Tema":"tarefa de APOO","Descricao":"Fazer a modelagem de programa de gerencia de parque eolico"},
-    {"Nome":"Faxina","Tema":"Casa","Descricao":"Fazer a faxina na casa"}
-]
+[{"Nome":"Tarefa","Tema":"tarefa de web","Descricao":"Terminar o programa da Todo list"},{"Nome":"APOO","Tema":"tarefa de APOO","Descricao":"Fazer a modelagem de programa de gerencia de parque eolico"},{"Nome":"Faxina","Tema":"Casa","Descricao":"Fazer a faxina na casa"}]
