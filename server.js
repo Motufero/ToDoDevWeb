@@ -55,7 +55,7 @@ app.delete('/tasks/:Nome', (req, res) => {
     
 }); 
 
-app.patch('/task', express.json(), (req, res) => {
+app.patch('/tasks', express.json(), (req, res) => {
     
     const patchTask = req.body;
     //console.log(patchTask);
@@ -72,6 +72,9 @@ app.patch('/task', express.json(), (req, res) => {
         tasks.forEach(task => {
             if(task["Nome"] != patchTask["Nome"]) {
                 patchTasks.push(task);
+            }
+            else{
+                patchTasks.push(patchTask);
             }
         })
         fs.writeFile(tasksFilePath, JSON.stringify(patchTasks), (err) => {

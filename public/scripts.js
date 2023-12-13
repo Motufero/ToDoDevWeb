@@ -75,47 +75,40 @@ function removeTask(){
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            //'Content' : JSON.stringify({Nome: taskName}),
         },
-        //body: JSON.stringify({Nome: taskName}),
     }).then(response => response.json())   
 }
 
 
-function updateTaskDB(){
+function updateTaskDB(name, topic, description){
 
+    console.log(name);
     var ref = document.getElementById('activeItem').innerHTML;
 
-    let newDbTaskName = document.getElementById('nomeTask').value;
-    let newDbTaskTopic = document.getElementById('topicTask').value;
-    let newDbTaskDesc = document.getElementById('descriptionTask').value;
+    var newDbTaskName ='';
+    var newDbTaskTopic ='';
+    var newDbTaskDesc = '';
 
-    console.log(ref);
-    console.log(newDbTaskName);
-    console.log(newDbTaskTopic);
-    console.log(newDbTaskDesc);
+    let DbTaskName = document.getElementById('nomeTask').value;
+    let DbTaskTopic = document.getElementById('topicTask').value;
+    let DbTaskDesc = document.getElementById('descriptionTask').value;
 
-    /*
-    fetch('/tasks')
-    .then(response => response.json())
-    .then(tasks => {
-        tasks.forEach(task => {
-            if(task["Nome"] == ref){     
-                if(newDbTaskName =! ''){
-                    task["Nome"] = newDbTaskName;
-                }           
-                if(newDbTaskTopic =! ''){
-                    task["Tema"] = newDbTaskTopic;
-                }
-                if(newDbTaskDesc =! ''){
-                    task["Descricao"] = newDbTaskDesc;
-                }
-                //mainInfo.append(chdHeader, chdTopic, chdDescription);
-            }
-        });
-    })
-    .catch(error => console.error('Erro:', error));
-    */
+    DbTaskName != '' ? newDbTaskName = DbTaskName : newDbTaskName = name;
+    DbTaskTopic != '' ? newDbTaskTopic = DbTaskTopic : newDbTaskTopic = topic;
+    DbTaskDesc != '' ? newDbTaskDesc = DbTaskDesc : newDbTaskDesc = description;
+
+    //console.log(ref);
+    //console.log(newDbTaskName);
+    //console.log(newDbTaskTopic);
+    //console.log(newDbTaskDesc);
+
+    fetch('/tasks', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ Nome: newDbTaskName, Tema: newDbTaskTopic, Descricao: newDbTaskDesc}),
+    }).then(response => response.json())   
 }
 
 function updateTask(){
@@ -153,11 +146,19 @@ function updateTask(){
                 chdLabelDescription.innerHTML = `<label for="" style="top: 10px;">Descrição</label>
                 <textarea name="message" id = "descriptionTask" class="form-control" placeholder="${chdDescription}"></textarea>`;
 
+                
                 let chdButton = document.createElement('button');
                 chdButton.className = "button";
-                chdButton.innerHTML = `<button type="submit" class="mainButton"
-                onclick="updateTaskDB()">Submit</button>`;
-
+                chdButton.style="background-color: #4caf50";
+                chdButton.textContent = "Submit";
+                chdButton.addEventListener('click', () => {
+                    updateTaskDB(chdHeader, chdTopic, chdDescription)
+                });
+                
+                
+                //chdButton.innerHTML = `<button type="submit" class="mainButton"
+                //onclick="updateTaskDB(chdHeader, chdTopic, chdDescription)">Submit</button>`;
+                
                 mainInfo.append(chdForm, chdLabelName, chdLabelGeneric, chdLabelDescription, chdButton);
 
             }
